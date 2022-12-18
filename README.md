@@ -1,2 +1,3 @@
-# fennecs
-A entity component system framework
+# Fennecs #
+
+Fennecs is an entity component system framework.
