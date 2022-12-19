@@ -12,9 +12,6 @@ bool EntityArchetype::Equals(const EntityArchetype& archetype) const {
 
 bool EntityArchetype::Has(SizeType index) const {
   BitMask mask = ComponentMaskByIndex(index);
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
-  // std::cout << "\t" << mask_ << std::endl;
-  // std::cout << "\t" << mask << std::endl;
   return (mask_ & mask) == mask;
 }
 

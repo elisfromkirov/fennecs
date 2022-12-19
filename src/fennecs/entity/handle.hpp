@@ -18,7 +18,7 @@ class EntityHandle {
 
  public:
   template <typename Component>
-  bool Has() const;
+  [[nodiscard]] bool Has() const;
 
   template <typename Component>
   Component& Get();
@@ -28,9 +28,7 @@ class EntityHandle {
                const EntityLayout* layout,
                Entity* entity);
 
- // FIXME:
- // private:
- public:
+ private:
   const EntityArchetype* archetype_;
   const EntityLayout* layout_;
   Entity* entity_;

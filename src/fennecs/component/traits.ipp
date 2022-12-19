@@ -17,8 +17,15 @@ Uint64 ComponentTraits<Component>::Index() {
 }
 
 template <typename Component>
+template <typename C, std::enable_if_t<std::is_move_constructible_v<C>, int>>
 void ComponentTraits<Component>::Move(Uint8* source, Uint8* destination) {
   new(destination) Component(::std::move(*reinterpret_cast<Component*>(source)));
+}
+
+template <typename Component>
+template <typename C, std::enable_if_t<!std::is_move_constructible_v<C> && std::is_copy_constructible_v<C>, int>>
+void ComponentTraits<Component>::Move(Uint8* source, Uint8* destination) {
+  new(destination) Component(*reinterpret_cast<Component*>(source));
 }
 
 template <typename Component>

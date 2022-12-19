@@ -36,6 +36,10 @@ class ComponentTraits {
   /**
    * @brief
    */
+  template <typename C = Component, std::enable_if_t<std::is_move_constructible_v<C>, int> = 0>
+  static void Move(Uint8* source, Uint8* destination);
+
+  template <typename C = Component, std::enable_if_t<!std::is_move_constructible_v<C> && std::is_copy_constructible_v<C>, int> = 0>
   static void Move(Uint8* source, Uint8* destination);
 
   /**

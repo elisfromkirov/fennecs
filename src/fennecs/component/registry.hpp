@@ -16,7 +16,7 @@ class ComponentRegistry {
   ComponentVirtualTable& VirtualTable(SizeType index);
 
   template <typename Component>
-  void AddVirtualTableOf();
+  void RegisterVirtualTableOf();
 
   template <typename Component>
   [[nodiscard]] bool HasVirtualTableOf();

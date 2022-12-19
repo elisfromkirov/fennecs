@@ -36,11 +36,6 @@ bool EntityArchetype::Has() const {
 
 template <typename Component>
 EntityArchetype EntityArchetype::Attach() const {
-//  std::cout << __func__ << " " << __LINE__ << std::endl;
-//  std::cout << "\t" << mask_ << std::endl;
-//  std::cout << "\t" << ComponentTraits<Component>::Mask() << std::endl;
-//  std::cout << "\t" << (mask_ | ComponentTraits<Component>::Mask()) << std::endl;
-
   return EntityArchetype{mask_ | ComponentTraits<Component>::Mask()};
 }
 

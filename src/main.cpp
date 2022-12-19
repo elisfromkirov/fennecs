@@ -1,4 +1,4 @@
-// temporary crutch using for correct syntax highlights
+// temporary crutch using for correct CLion syntax highlights
 
 #include <fennecs/component/registry.hpp>
 #include <fennecs/component/traits.hpp>

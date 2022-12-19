@@ -1,7 +1,5 @@
 #include <fennecs/entity/world.hpp>
 
-#include <iostream>
-
 namespace fennecs {
 
 EntityWorld::EntityWorld() {
@@ -9,10 +7,10 @@ EntityWorld::EntityWorld() {
 }
 
 EntityHandle EntityWorld::NewEntity() {
-  EntityArray& array = entity_registry_.Array(entity_registry_.FindArray(EntityArchetype{}));
-  Entity* entity = entity_allocator_.Allocate(array.Layout());
-  array.Insert(entity);
-  return EntityHandle{&array.Archetype(), &array.Layout(), entity};
+  EntityArray* array = entity_registry_.FindArray(EntityArchetype{});
+  Entity* entity = entity_allocator_.Allocate(array->Layout());
+  array->Insert(entity);
+  return EntityHandle{&array->Archetype(), &array->Layout(), entity};
 }
 
 void EntityWorld::Move(const EntityArchetype& archetype,

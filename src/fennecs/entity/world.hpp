@@ -26,10 +26,10 @@ class EntityWorld {
 
  private:
   template <typename Component>
-  EntityArray& FindArrayOnAttach(EntityHandle handle);
+  EntityArray* FindArrayOnAttach(EntityHandle handle);
 
   template <typename Component>
-  EntityArray& FindArrayOnDetach(EntityHandle handle);
+  EntityArray* FindArrayOnDetach(EntityHandle handle);
 
   void Move(const EntityArchetype& archetype,
             const EntityLayout& layout,

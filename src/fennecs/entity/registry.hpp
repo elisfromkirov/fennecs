@@ -3,24 +3,18 @@
 #include <fennecs/core/types.hpp>
 #include <fennecs/entity/array.hpp>
 
-#include <vector>
+#include <list>
 
 namespace fennecs {
 
 class EntityRegistry {
  public:
-  EntityRegistry();
+  EntityArray* AddArray(const EntityArchetype& archetype, const EntityLayout& layout);
 
-  EntityArray& Array(SizeType index);
-
-  [[nodiscard]] SizeType Size() const;
-
-  SizeType AddArray(const EntityArchetype& archetype, const EntityLayout& layout);
-
-  [[nodiscard]] SizeType FindArray(const EntityArchetype& archetype) const;
+  EntityArray* FindArray(const EntityArchetype& archetype);
 
  private:
-  std::vector<EntityArray> arrays_;
+  std::list<EntityArray> arrays_;
 };
 
 }  // namespace fennecs

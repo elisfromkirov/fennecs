@@ -50,16 +50,16 @@ class EntityArchetype {
    * @breif Creates archetype copy but with additional component.
    */
   template <typename Component>
-  EntityArchetype Attach() const;
+  [[nodiscard]] EntityArchetype Attach() const;
 
   /**
    * @brief Creates archetype copy but without component.
    */
   template <typename Component>
-  EntityArchetype Detach() const;
+  [[nodiscard]] EntityArchetype Detach() const;
 
  private:
-  EntityArchetype(BitMask mask);
+  explicit EntityArchetype(BitMask mask);
 
  private:
   BitMask mask_;

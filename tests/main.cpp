@@ -119,5 +119,8 @@ int main() {
   handle = world.Attach<MoveOnlyComponent>(handle);
   std::cout << handle.Get<TrackableComponent>().value_ << std::endl;
   handle = world.Attach<Velocity>(handle);
+  std::cout << handle.Get<TrackableComponent>().value_ << std::endl;
+  handle = world.Attach<CopyOnlyComponent>(handle);
+  std::cout << handle.Get<TrackableComponent>().value_ << std::endl;
   return 0;
 }

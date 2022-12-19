@@ -2,8 +2,6 @@
 #error Do not include this file directly
 #endif
 
-#include <iostream>
-
 namespace fennecs {
 
 template <typename Type>
@@ -46,8 +44,6 @@ bool Node<Type>::IsLinked() const {
 
 template <typename Type>
 void Node<Type>::LinkAfter(Node* node) {
-  // std::cout << __func__ << std::endl;
-
   ASSERT(IsValid(), "Internal assertion failure");
   ASSERT(node != nullptr, "Node must be valid pointer");
   ASSERT(!node->IsLinked(), "Unable to link already linked node");
@@ -60,8 +56,6 @@ void Node<Type>::LinkAfter(Node* node) {
 
 template <typename Type>
 void Node<Type>::LinkBefore(Node* node) {
-  // std::cout << __func__ << std::endl;
-
   ASSERT(IsValid(), "Internal assertion failure");
   ASSERT(node != nullptr, "Node must be a valid pointer");
   ASSERT(!node->IsLinked(), "Unable to link already linked node");
@@ -77,8 +71,6 @@ void Node<Type>::LinkBefore(Node* node) {
 
 template <typename Type>
 void Node<Type>::Unlink() {
-  // std::cout << __func__ << std::endl;
-
   ASSERT(IsValid(), "Internal assertion failure");
   ASSERT(IsLinked(), "Unable to unlink already unlinked node");
 
@@ -90,10 +82,6 @@ void Node<Type>::Unlink() {
 
 template <typename Type>
 bool Node<Type>::IsValid() const {
-  // std::cout << next_ << std::endl;
-  // std::cout << prev_ << std::endl;
-  // std::cout << this << std::endl;
-
   return next_ != nullptr && prev_ != nullptr
       && ((prev_ == this && next_ == this) || (prev_ != this && next_ != this));
 }

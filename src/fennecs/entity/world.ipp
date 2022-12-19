@@ -8,74 +8,69 @@ namespace fennecs {
 
 template <typename Component, typename... ArgTypes>
 EntityHandle EntityWorld::Attach(EntityHandle handle, ArgTypes&& ... args) {
-  // std::cout << ComponentTraits<Component>::Index() << std::endl;
-
   // Check whether component contains in entity.
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
   if (handle.template Has<Component>()) {
     return handle;
   }
 
   // Extract entity from the array where it is.
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
   handle.entity_->Unlink();
 
   // Find appropriate new array.
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
-  EntityArray& array = FindArrayOnAttach<Component>(handle);
+  EntityArray* array = FindArrayOnAttach<Component>(handle);
 
   // Allocate memory for new entity.
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
-  Entity* entity = entity_allocator_.Allocate(array.Layout());
+  Entity* entity = entity_allocator_.Allocate(array->Layout());
 
   // Move component from entity to new entity
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
   Move(*handle.archetype_,
        *handle.layout_,
        handle.entity_,
-       array.Archetype(),
-       array.Layout(),
+       array->Archetype(),
+       array->Layout(),
        entity);
 
   // Instantiate additional component
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
-  Uint8* place = entity->Data() + array.Layout().template OffsetOf<Component>();
+  Uint8* place = entity->Data() + array->Layout().template OffsetOf<Component>();
   new(place) Component(::std::forward<ArgTypes>(args)...);
 
   // Insert entity to new array.
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
-  array.Insert(entity);
+  array->Insert(entity);
 
   // Deallocate memory of entity.
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
   entity_allocator_.Deallocate(handle.entity_);
 
   // Return handle for new entity
-  // std::cout << __func__ << " " << __LINE__ << std::endl;
-  return EntityHandle{&array.Archetype(), &array.Layout(), entity};
+  return EntityHandle{&array->Archetype(), &array->Layout(), entity};
 }
 
 template <typename Component>
 EntityHandle EntityWorld::Detach(EntityHandle handle) {
+  ASSERT(false, "TODO: Implement it!");
+
+  return EntityHandle::Null();
 }
 
 template <typename Component>
-EntityArray& EntityWorld::FindArrayOnAttach(EntityHandle handle) {
-  SizeType index = entity_registry_.FindArray(handle.archetype_->template Attach<Component>());
-  if (index == entity_registry_.Size()) {
-    index = entity_registry_.AddArray(handle.archetype_->template Attach<Component>(),
-                                      handle.layout_->template Attach<Component>());
-
-    if (!component_registry_.template HasVirtualTableOf<Component>()) {
-      component_registry_.template AddVirtualTableOf<Component>();
-    }
+EntityArray* EntityWorld::FindArrayOnAttach(EntityHandle handle) {
+  EntityArray* array = entity_registry_.FindArray(handle.archetype_->template Attach<Component>());
+  if (array != nullptr) {
+    return array;
   }
-  return entity_registry_.Array(index);
+
+  if (!component_registry_.template HasVirtualTableOf<Component>()) {
+    component_registry_.template RegisterVirtualTableOf<Component>();
+  }
+
+  return entity_registry_.AddArray(handle.archetype_->template Attach<Component>(),
+                                   handle.layout_->template Attach<Component>());
 }
 
 template <typename Component>
-EntityArray& EntityWorld::FindArrayOnDetach(EntityHandle handle) {
+EntityArray* EntityWorld::FindArrayOnDetach(EntityHandle handle) {
+  ASSERT(false, "TODO: Implement it!");
+
+  return nullptr;
 }
 
 }  // namespace fennecs
-
