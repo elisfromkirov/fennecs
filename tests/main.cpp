@@ -53,6 +53,10 @@ struct TrackableComponent {
     return *this;
   }
 
+  ~TrackableComponent() {
+    std::cout << "destructor" << std::endl;
+  }
+
   int value_;
 };
 
@@ -112,7 +116,7 @@ struct CopyOnlyComponent {
 
 int main() {
   fennecs::EntityWorld world{};
-  fennecs::EntityHandle handle = world.NewEntity();
+  fennecs::EntityHandle handle = world.AddEntity();
   handle = world.Attach<Position>(handle);
   handle = world.Attach<TrackableComponent>(handle, 5);
   std::cout << handle.Get<TrackableComponent>().value_ << std::endl;

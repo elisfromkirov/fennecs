@@ -7,4 +7,9 @@ EntityHandle EntityStream::Next() {
   return EntityHandle::Null();
 }
 
+EntityStream::EntityStream(EntityArchetype archetype, std::list<EntityArray>& arrays)
+    : archetype_{archetype},
+      arrays_{arrays} {
+}
+
 }  // namespace fennecs

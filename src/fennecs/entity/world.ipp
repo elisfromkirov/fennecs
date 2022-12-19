@@ -6,23 +6,28 @@
 
 namespace fennecs {
 
+// 1. Check whether component contains in entity.
+// 2. Extract entity from the array where it is.
+// 3. Find appropriate new array.
+// 4. Allocate memory for new entity.
+// 5. Move component from entity to new entity.
+// 6. Instantiate additional component.
+// 7. Insert entity to new array.
+// 8. Destroy entity's components.
+// 9. Deallocate entity's memory.
+// 10. Return handle for new entity.
 template <typename Component, typename... ArgTypes>
 EntityHandle EntityWorld::Attach(EntityHandle handle, ArgTypes&& ... args) {
-  // Check whether component contains in entity.
   if (handle.template Has<Component>()) {
     return handle;
   }
 
-  // Extract entity from the array where it is.
   handle.entity_->Unlink();
 
-  // Find appropriate new array.
   EntityArray* array = FindArrayOnAttach<Component>(handle);
 
-  // Allocate memory for new entity.
   Entity* entity = entity_allocator_.Allocate(array->Layout());
 
-  // Move component from entity to new entity
   Move(*handle.archetype_,
        *handle.layout_,
        handle.entity_,
@@ -30,17 +35,15 @@ EntityHandle EntityWorld::Attach(EntityHandle handle, ArgTypes&& ... args) {
        array->Layout(),
        entity);
 
-  // Instantiate additional component
   Uint8* place = entity->Data() + array->Layout().template OffsetOf<Component>();
   new(place) Component(::std::forward<ArgTypes>(args)...);
 
-  // Insert entity to new array.
   array->Insert(entity);
 
-  // Deallocate memory of entity.
+  Destroy(*handle.archetype_, *handle.layout_, handle.entity_);
+
   entity_allocator_.Deallocate(handle.entity_);
 
-  // Return handle for new entity
   return EntityHandle{&array->Archetype(), &array->Layout(), entity};
 }
 
@@ -68,9 +71,13 @@ EntityArray* EntityWorld::FindArrayOnAttach(EntityHandle handle) {
 
 template <typename Component>
 EntityArray* EntityWorld::FindArrayOnDetach(EntityHandle handle) {
-  ASSERT(false, "TODO: Implement it!");
+  EntityArray* array = entity_registry_.FindArray(handle.archetype_->template Detach<Component>());
+  if (array != nullptr) {
+    return array;
+  }
 
-  return nullptr;
+  return entity_registry_.AddArray(handle.archetype_->template Detach<Component>(),
+                                   handle.layout_->template Detach<Component>());
 }
 
 }  // namespace fennecs

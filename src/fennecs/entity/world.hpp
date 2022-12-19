@@ -12,15 +12,35 @@
 
 namespace fennecs {
 
+/**
+ * @brief
+ */
 class EntityWorld {
  public:
+  /**
+   * @brief Creates empty entity world.
+   */
   EntityWorld();
 
-  EntityHandle NewEntity();
+  /**
+   * @brief Adds new entity to world.
+   */
+  EntityHandle AddEntity();
 
+  /**
+   * @brief Removes existing entity from world.
+   */
+  void RemoveEntity(EntityHandle);
+
+  /**
+   * @brief Attaches additional component to existing entity.
+   */
   template <typename Component, typename... ArgTypes>
   EntityHandle Attach(EntityHandle handle, ArgTypes&& ... args);
 
+  /**
+   * @brief Detaches component from existing entity.
+   */
   template <typename Component>
   EntityHandle Detach(EntityHandle handle);
 
@@ -37,6 +57,10 @@ class EntityWorld {
             const EntityArchetype& new_archetype,
             const EntityLayout& new_layout,
             Entity* new_entity);
+
+  void Destroy(const EntityArchetype& archetype,
+               const EntityLayout& layout,
+               Entity* entity);
 
  private:
   ComponentRegistry component_registry_;
