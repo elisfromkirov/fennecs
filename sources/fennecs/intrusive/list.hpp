@@ -16,14 +16,19 @@ class IntrusiveList {
   IntrusiveList();
 
   /**
+   * @brief Checkes whether list empty or not.
+   */
+   [[nodiscard]] bool IsEmpty() const;
+
+  /**
    * @brief Returns head of list.
    */
-  Node<Type>* Head();
+  [[nodiscard]] Node<Type>* Head();
 
   /**
    * @brief Returns tail of list.
    */
-  Node<Type>* Tail();
+  [[nodiscard]] Node<Type>* Tail();
 
   /**
    * @brief Insert node to the end of list.

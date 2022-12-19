@@ -5,10 +5,11 @@
 #include <fennecs/entity/impl.hpp>
 #include <fennecs/entity/layout.hpp>
 #include <fennecs/intrusive/list.hpp>
+#include <fennecs/intrusive/node.hpp>
 
 namespace fennecs {
 
-class EntityArray {
+class EntityArray : public Node<EntityArray> {
  public:
   EntityArray(const EntityArchetype& archetype, const EntityLayout& layout);
 
@@ -16,9 +17,11 @@ class EntityArray {
 
   [[nodiscard]] const EntityLayout& Layout() const;
 
-  Entity* Head();
+  [[nodiscard]] bool IsEmpty() const;
 
-  Entity* Tail();
+  [[nodiscard]] Node<Entity>* Head();
+
+  [[nodiscard]] Node<Entity>* Tail();
 
   void Insert(Entity* node);
 

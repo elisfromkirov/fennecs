@@ -55,7 +55,7 @@ class Node {
    */
   void Unlink();
 
- // private: FIXME: uncomment it!
+ private:
   /**
    * @brief Checks internal class invariants.
    */

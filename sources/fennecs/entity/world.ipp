@@ -80,4 +80,11 @@ EntityArray* EntityWorld::FindArrayOnDetach(EntityHandle handle) {
                                    handle.layout_->template Detach<Component>());
 }
 
+template <typename... Components>
+EntityStream EntityWorld::Query() {
+  return EntityStream{EntityArchetype::ConsistsOf<Components...>(),
+                      entity_registry_.Head(),
+                      entity_registry_.Tail()};
+}
+
 }  // namespace fennecs

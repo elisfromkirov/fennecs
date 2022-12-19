@@ -21,7 +21,9 @@ class EntityHandle {
   [[nodiscard]] bool Has() const;
 
   template <typename Component>
-  Component& Get();
+  [[nodiscard]] Component& Get();
+
+  [[nodiscard]] bool IsNull() const;
 
  private:
   EntityHandle(const EntityArchetype* archetype,

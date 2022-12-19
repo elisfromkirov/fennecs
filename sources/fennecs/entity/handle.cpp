@@ -12,4 +12,8 @@ EntityHandle::EntityHandle(const EntityArchetype* archetype,
     : archetype_{archetype}, layout_{layout}, entity_{entity} {
 }
 
+bool EntityHandle::IsNull() const {
+  return entity_ == nullptr;
+}
+
 }  // namespace fennecs

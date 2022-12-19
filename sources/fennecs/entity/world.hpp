@@ -9,6 +9,7 @@
 #include <fennecs/entity/impl.hpp>
 #include <fennecs/entity/layout.hpp>
 #include <fennecs/entity/registry.hpp>
+#include <fennecs/entity/stream.hpp>
 
 namespace fennecs {
 
@@ -43,6 +44,12 @@ class EntityWorld {
    */
   template <typename Component>
   EntityHandle Detach(EntityHandle handle);
+
+  /**
+   * @brief Queries stream of entities of given archetype.
+   */
+   template <typename... Components>
+   EntityStream Query();
 
  private:
   template <typename Component>

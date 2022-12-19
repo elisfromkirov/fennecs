@@ -23,11 +23,16 @@ class EntityStream {
   EntityHandle Next();
 
  private:
-  EntityStream(EntityArchetype archetype, std::list<EntityArray>& arrays);
+  EntityStream(const EntityArchetype& archetype, Node<EntityArray>* head, Node<EntityArray>* tail);
 
  private:
   EntityArchetype archetype_;
-  std::list<EntityArray>& arrays_;
+  Node<EntityArray>* head_array_node_;
+  Node<EntityArray>* tail_array_node_;
+  Node<EntityArray>* curr_array_node_;
+  Node<Entity>* head_entity_node_;
+  Node<Entity>* tail_entity_node_;
+  Node<Entity>* curr_entity_node_;
 };
 
 }  // namespace ecs

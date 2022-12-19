@@ -15,12 +15,16 @@ const EntityLayout& EntityArray::Layout() const {
   return layout_;
 }
 
-Entity* EntityArray::Head() {
-  return entities_.Tail()->AsContent();
+bool EntityArray::IsEmpty() const {
+  return entities_.IsEmpty();
 }
 
-Entity* EntityArray::Tail() {
-  return entities_.Tail()->AsContent();
+Node<Entity>* EntityArray::Head() {
+  return entities_.Head();
+}
+
+Node<Entity>* EntityArray::Tail() {
+  return entities_.Tail();
 }
 
 void EntityArray::Insert(Entity* node) {

@@ -13,16 +13,14 @@ namespace fennecs {
  */
 class EntityArchetype {
  public:
+  template <typename... Components>
+  static EntityArchetype ConsistsOf();
+
+ public:
   /**
    * @brief Constructs archetype that contains given bit mask.
    */
   EntityArchetype() = default;
-
-  /**
-   * @brief Constructs archetype that contains given set of components.
-   */
-  template <typename... Components>
-  EntityArchetype();
 
   /**
    * @brief Checks whether this archetype is-a given archetype.

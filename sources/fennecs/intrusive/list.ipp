@@ -10,13 +10,18 @@ IntrusiveList<Type>::IntrusiveList()
 }
 
 template <typename Type>
+bool IntrusiveList<Type>::IsEmpty() const {
+  return !node_.IsLinked();
+}
+
+template <typename Type>
 Node<Type>* IntrusiveList<Type>::Head() {
   return node_.Next();
 }
 
 template <typename Type>
 Node<Type>* IntrusiveList<Type>::Tail() {
-  return node_.Prev();
+  return &node_;
 }
 
 template <typename Type>
