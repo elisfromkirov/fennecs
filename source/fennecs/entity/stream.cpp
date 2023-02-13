@@ -34,8 +34,8 @@ EntityStream::EntityStream(const EntityArchetype& archetype,
                            Node<EntityArray>* head,
                            Node<EntityArray>* tail)
     : archetype_{archetype},
-      tail_array_node_{tail},
       curr_array_node_{head},
+      tail_array_node_{tail},
       curr_entity_node_{nullptr},
       tail_entity_node_{nullptr} {
   while (!(curr_array_node_ == tail_array_node_ ||

@@ -16,4 +16,8 @@ bool EntityHandle::IsNull() const {
   return entity_ == nullptr;
 }
 
+bool EntityHandle::IsEqual(const EntityHandle& handle) const {
+  return entity_ == handle.entity_;
+}
+
 }  // namespace fennecs

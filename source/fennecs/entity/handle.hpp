@@ -25,6 +25,8 @@ class EntityHandle {
 
   [[nodiscard]] bool IsNull() const;
 
+  [[nodiscard]] bool IsEqual(const EntityHandle& handle) const;
+
  private:
   EntityHandle(const EntityArchetype* archetype,
                const EntityLayout* layout,

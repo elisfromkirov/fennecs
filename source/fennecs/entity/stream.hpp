@@ -27,12 +27,10 @@ class EntityStream {
 
  private:
   EntityArchetype archetype_;
-  Node<EntityArray>* head_array_node_;
-  Node<EntityArray>* tail_array_node_;
   Node<EntityArray>* curr_array_node_;
-  Node<Entity>* head_entity_node_;
-  Node<Entity>* tail_entity_node_;
+  Node<EntityArray>* tail_array_node_;
   Node<Entity>* curr_entity_node_;
+  Node<Entity>* tail_entity_node_;
 };
 
 }  // namespace ecs
