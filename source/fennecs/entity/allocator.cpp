@@ -1,7 +1,5 @@
 #include <fennecs/entity/allocator.hpp>
 
-#include <iostream>
-
 namespace fennecs {
 
 Entity* EntityAllocator::Allocate(const EntityLayout& layout) {

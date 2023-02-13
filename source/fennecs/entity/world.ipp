@@ -2,8 +2,6 @@
 #error Do not include this file directly
 #endif
 
-#include <iostream>
-
 namespace fennecs {
 
 // 1. Check whether component contains in entity.

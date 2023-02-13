@@ -1,5 +1,7 @@
 #include <fennecs/entity/world.hpp>
 
+#include <iostream>
+
 struct TrackableComponent {
   TrackableComponent() {
     std::cout << "default constructor" << std::endl;
