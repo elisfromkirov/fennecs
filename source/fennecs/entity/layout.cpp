@@ -11,7 +11,7 @@ SizeType EntityLayout::Stride() const {
 }
 
 SizeType EntityLayout::Offset(SizeType index) const {
-  ASSERT(offsets_.count(index) == 1,
+  FENNECS_ASSERT(offsets_.count(index) == 1,
          "Attempt to get offset of component that does not contain in entity");
 
   return offsets_.at(index);

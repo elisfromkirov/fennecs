@@ -6,7 +6,7 @@ namespace fennecs {
 
 template <typename Component>
 SizeType EntityLayout::OffsetOf() const {
-  ASSERT(offsets_.count(ComponentTraits<Component>::Index()) == 1,
+  FENNECS_ASSERT(offsets_.count(ComponentTraits<Component>::Index()) == 1,
          "Attempt ot get offset of component that does not contain in entity");
 
   return offsets_.at(ComponentTraits<Component>::Index());
@@ -14,7 +14,7 @@ SizeType EntityLayout::OffsetOf() const {
 
 template <typename Component>
 EntityLayout EntityLayout::Attach() const {
-  ASSERT(offsets_.count(ComponentTraits<Component>::Index()) != 1,
+  FENNECS_ASSERT(offsets_.count(ComponentTraits<Component>::Index()) != 1,
          "Attempt to attach already attached component");
 
   EntityLayout layout{*this};
@@ -25,7 +25,7 @@ EntityLayout EntityLayout::Attach() const {
 
 template <typename Component>
 EntityLayout EntityLayout::Detach() const {
-  ASSERT(false, "TODO: Implement it.");
+  FENNECS_ASSERT(false, "TODO: Implement it.");
 
   return EntityLayout{};
 }

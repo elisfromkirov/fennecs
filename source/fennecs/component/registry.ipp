@@ -6,7 +6,7 @@ namespace fennecs {
 
 template <typename Component>
 void ComponentRegistry::RegisterVirtualTableOf() {
-  ASSERT(virtual_tables_.count(ComponentTraits<Component>::Index()) == 0,
+  FENNECS_ASSERT(virtual_tables_.count(ComponentTraits<Component>::Index()) == 0,
          "Attempt to register already registered component");
 
   virtual_tables_.emplace(ComponentTraits<Component>::Index(),

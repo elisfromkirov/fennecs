@@ -18,14 +18,14 @@ Node<Type>::Node(Node* next, Node* prev)
 
 template <typename Type>
 Node<Type>* Node<Type>::Next() {
-  ASSERT(IsValid(), "Internal assertion failure");
+  FENNECS_ASSERT(IsValid(), "Internal assertion failure");
 
   return next_;
 }
 
 template <typename Type>
 Node<Type>* Node<Type>::Prev() {
-  ASSERT(IsValid(), "Internal assertion failure");
+  FENNECS_ASSERT(IsValid(), "Internal assertion failure");
 
   return prev_;
 }
@@ -37,16 +37,16 @@ Type* Node<Type>::AsContent() {
 
 template <typename Type>
 bool Node<Type>::IsLinked() const {
-  ASSERT(IsValid(), "Internal assertion failure");
+  FENNECS_ASSERT(IsValid(), "Internal assertion failure");
 
   return !(prev_ == this && next_ == this);
 }
 
 template <typename Type>
 void Node<Type>::LinkAfter(Node* node) {
-  ASSERT(IsValid(), "Internal assertion failure");
-  ASSERT(node != nullptr, "Node must be valid pointer");
-  ASSERT(!node->IsLinked(), "Unable to link already linked node");
+  FENNECS_ASSERT(IsValid(), "Internal assertion failure");
+  FENNECS_ASSERT(node != nullptr, "Node must be valid pointer");
+  FENNECS_ASSERT(!node->IsLinked(), "Unable to link already linked node");
 
   next_->prev_ = node;
   node->next_ = next_;
@@ -56,23 +56,23 @@ void Node<Type>::LinkAfter(Node* node) {
 
 template <typename Type>
 void Node<Type>::LinkBefore(Node* node) {
-  ASSERT(IsValid(), "Internal assertion failure");
-  ASSERT(node != nullptr, "Node must be a valid pointer");
-  ASSERT(!node->IsLinked(), "Unable to link already linked node");
+  FENNECS_ASSERT(IsValid(), "Internal assertion failure");
+  FENNECS_ASSERT(node != nullptr, "Node must be a valid pointer");
+  FENNECS_ASSERT(!node->IsLinked(), "Unable to link already linked node");
 
   prev_->next_ = node;
   node->prev_ = prev_;
   prev_ = node;
   node->next_ = this;
 
-  ASSERT(IsValid(), "Internal assertion failure");
-  ASSERT(node->IsValid(), "Internal assertion failure");
+  FENNECS_ASSERT(IsValid(), "Internal assertion failure");
+  FENNECS_ASSERT(node->IsValid(), "Internal assertion failure");
 }
 
 template <typename Type>
 void Node<Type>::Unlink() {
-  ASSERT(IsValid(), "Internal assertion failure");
-  ASSERT(IsLinked(), "Unable to unlink already unlinked node");
+  FENNECS_ASSERT(IsValid(), "Internal assertion failure");
+  FENNECS_ASSERT(IsLinked(), "Unable to unlink already unlinked node");
 
   prev_->next_ = next_;
   next_->prev_ = prev_;

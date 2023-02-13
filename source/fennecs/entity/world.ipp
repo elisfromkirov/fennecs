@@ -47,7 +47,7 @@ EntityHandle EntityWorld::Attach(EntityHandle handle, ArgTypes&& ... args) {
 
 template <typename Component>
 EntityHandle EntityWorld::Detach(EntityHandle handle) {
-  ASSERT(false, "TODO: Implement it!");
+  FENNECS_ASSERT(false, "TODO: Implement it!");
 
   return EntityHandle::Null();
 }

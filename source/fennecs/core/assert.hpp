@@ -2,4 +2,4 @@
 
 #include <cassert>
 
-#define ASSERT(expression, message) assert(expression && message)
+#define FENNECS_ASSERT(expression, message) assert(expression && message)
